@@ -23,8 +23,6 @@
     $file = DB::table('images')->where('user', $email)->pluck('image');
     $file = str_replace('["','',$file);
     $file = str_replace('"]','',$file);
-    ?>
-    <?
     $county = "";
     $district = "";
     $location = "";

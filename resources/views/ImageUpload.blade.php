@@ -70,13 +70,12 @@
                             {{--大頭貼顯示--}}
                             <div class="avatar">
                                 @yield('content2')
-                                <?
-                                if (file_exists('images/'.$file)) {
-                                ?>
-                                    <img src="/images/<?php echo $file ?>" height="200" width="200" id="avatarimage" style="position: absolute">
-                                <?}else{?>
-                                <img src="" height="200" width="200" id="avatarimage" style=" position: absolute">
-                                <?}?>
+
+                                @if (file_exists('images/'.$file))
+                                <img src="/images/<?php echo $file ?>" height="200" width="200" id="avatarimage" style="position: absolute">
+                                @else
+                                <img height="200" width="200" id="avatarimage" style=" position: absolute">
+                                @endif
                                 <input type="button" id="fileSelect" class="fileSelect-btn" style="display:none;"/>
                             </div>
                              {{--資料表單--}}
