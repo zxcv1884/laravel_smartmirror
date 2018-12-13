@@ -1,0 +1,134 @@
+body {
+    background-color: rgb(214,210,206);
+    color: black;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    margin :0;
+}
+.app{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    min-width: 1280px;
+    min-height: 500px;
+}
+.pageHeader {
+    position:fixed;
+    overflow: hidden;
+    top:0px;
+    left: 0px;
+    background-color: rgb(234, 230, 226);
+    opacity:0.9;
+    z-index: 1;
+    width: 100%;
+    line-height: 60px;
+    min-width: 523px;
+}
+.pageHeader a {
+    float: right;
+    display: block;
+    color:white;
+    text-align: center;
+
+    text-decoration: none;
+}
+
+.pageHeader a:hover {
+    color: lightskyblue;
+    text-decoration: none;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+    display: flex;
+    align-items: center;
+}
+
+.position-ref {
+    position: relative;
+}
+.head-title2 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+}
+.head-title1 {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    margin: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    text-align: left;
+    margin-bottom: 30px;
+}
+.links{
+    color: #636b6f;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.s_m > a{
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1.6px;
+    text-decoration: none;
+    text-transform: uppercase;
+    float: left;
+}
+.main{
+    position: relative;
+    padding-top: 60px;
+    width: 100%;
+    left: 0px;
+    right: 0px;
+}
+
+.info{
+    padding-top: 5%;
+    float: none;
+    margin: auto;
+}
+.logintop{
+    padding-top: 3%;
+}
+.main-log {
+    margin-top: 200px;
+}
+.card-header-color{
+    background-color: rgb(185, 181, 177);
+    box-shadow: 2px 3px 12px gray;
+    font-size: .9rem;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-size: 14.399999618530273px;
+    line-height: 23px;
+    margin-bottom: 0px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 12px;
+
+}
+.card-body-color{
+    background-color: rgb(238, 234, 230);
+    box-shadow: 2px 3px 12px gray;
+    border-radius: 0px 0px 5px 5px;
+}
