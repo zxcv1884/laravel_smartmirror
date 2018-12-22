@@ -37,14 +37,14 @@ class ImageUploadController extends Controller
         if ($validator->passes()) {
             $user = $request->user;
             $image = $request->image;
-
+            $image_file = $request->image;
             list($type, $image) = explode(';', $image);
             list(, $image) = explode(',', $image);
             $image = base64_decode($image);
             $image_name = time() . '.png';
             $path = public_path('images/' . $image_name);
             file_put_contents($path, $image);
-            $input = array('user' => $user, 'image' => $image_name);
+            $input = array('user' => $user, 'image' => $image_name,'image_file' => $image_file);
 
             if (DB::select("SELECT * FROM `images` WHERE user ='" . $user . "'", [true])) {
                 $file = DB::table('images')->where('user', $user)->pluck('image');
@@ -59,7 +59,7 @@ class ImageUploadController extends Controller
                 }
                 DB::table('images')
                     ->where('user', '=', $user)
-                    ->update(['updated_at' => now(), 'image' => $image_name]);
+                    ->update(['updated_at' => now(), 'image' => $image_name, 'image_file' =>$image_file]);
             } else {
                 Image::create($input);
             }
