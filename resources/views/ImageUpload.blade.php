@@ -74,7 +74,7 @@
                                 @if (file_exists('images/'.$file))
                                 <img src="/images/<?php echo $file ?>" height="200" width="200" id="avatarimage" style="position: absolute">
                                 @else
-                                <img height="200" width="200" id="avatarimage" style=" position: absolute">
+                                <img height="200" width="200" id="avatarimage" style=" position: absolute;border-style: solid; border-width: 2px">
                                 @endif
                                 <input type="button" id="fileSelect" class="fileSelect-btn" style="display:none;"/>
                             </div>
