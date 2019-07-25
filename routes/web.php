@@ -23,7 +23,10 @@ Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout', function () {
     return abort(404);
 });
-
+Route::get('/demo', function () {
+    return view('demo');
+});
 Route::get('custom-register','CustomController@showRegisterForm');
 Route::get('home', ['uses'=>'ImageUploadController@home']);
 Route::post('home', ['as'=>'croppie.upload-image','uses'=>'ImageUploadController@ImageUploadPost']);
+Route::post('googleCalendar','googleCalendarController@googleCalendar');

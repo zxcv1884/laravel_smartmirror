@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <style>
+    .google-Btn:hover{
+        -moz-box-shadow: 0 0 10px #ccc;
+        -webkit-box-shadow: 0 0 10px #ccc;
+        box-shadow: 0 0 10px #ccc;
+    }
     .fileSelect-btn {
         background: url({{url('/img/uploadicon.png')}}) no-repeat;
         background-size: 50%;
@@ -16,8 +21,6 @@
         height: 200px;
         width: 200px;
         margin: auto;
-
-
     }
     #avatarimage{
         background: url({{url('/img/uploadicon.png')}}) no-repeat;
@@ -111,6 +114,12 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <label for="email" class="col-sm-4 col-form-label text-md-right">連結GoogleCalendar：</label>
+                                    <div class="col-md-6">
+                                        <img src="/images/google.png" class="google-Btn" width="200" onclick="disp_prompt()" style="cursor:pointer">
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <label for="email" class="col-sm-4 col-form-label text-md-right">關注新聞：</label>
                                     <div class="col-md-6">
                                         <input type='hidden' value='0' name='headline'>
@@ -177,7 +186,63 @@
     </form>
 </div>
 
+<script src="/js/googleCalendar.js" type="text/javascript"></script>
+
 <script type="text/javascript">
+    let email = '{{ Auth::user()->email }}';
+        //彈出視窗位置置中
+        function PopupCenter(url, title, w, h) {
+            // Fixes dual-screen position                         Most browsers      Firefox
+            let dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
+            let dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
+
+            let width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+            let height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+            let systemZoom = width / window.screen.availWidth;
+            let left = (width - w) / 2 / systemZoom + dualScreenLeft
+            let top = (height - h) / 2 / systemZoom + dualScreenTop + 50
+            let newWindow = window.open(url, title, 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
+
+            // Puts focus on the newWindow
+            if (window.focus) newWindow.focus();
+        }
+
+    function disp_prompt() {
+        PopupCenter('https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar.readonly&response_type=code&client_id=1076605905502-kb1njpjv3pv1rq8a639ct994erlud0oj.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob', 'xtf', '515', '600');
+        swal({
+            title: "請輸入驗證碼",
+            input: "text",
+            showCancelButton: true,
+            confirmButtonColor: "#1FAB45",
+            confirmButtonText: "送出",
+            cancelButtonText: "取消",
+            buttonsStyling: true,
+            preConfirm: (Code) => {
+                $.ajax({
+                    type: "POST",
+                    url: "googleCalendar",
+                    data: {'email':email
+                        ,'Code': Code},
+                    cache: false,
+                    success: function (response) {
+                        swal(
+                            "輸入完成，如果驗證碼正確將會在一個小時內更新。",
+                            "您輸入的驗證碼："+response.Code,
+                            "success"
+                        )
+                    },
+                    failure: function (response) {
+                        swal(
+                            "Internal Error",
+                            "Oops, your note was not saved.", // had a missing comma
+                            "error"
+                        )
+                    }
+                });
+            }
+        })
+    }
     $("#twzipcode").twzipcode({
         "zipcodeIntoDistrict": true,
         "css": ["city form-control", "town form-control"],
@@ -225,7 +290,7 @@
             }).then(function(){
                 console.log('jQuery bind complete');
             });
-        }
+        };
         reader.readAsDataURL(this.files[0]);
     });
     $uploadCrop = $('#upload-demo').croppie({

@@ -48,9 +48,6 @@
             text-align: left;
             height: 20.3125rem;
         }
-        .maintop{
-
-        }
     </style>
 </head>
 <body>
@@ -58,7 +55,7 @@
 <div class=" position-ref full-height">
         @include('header')
     {{--第一頁--}}
-        <div class="main maintop">
+        <div class="main">
         <div class="head-img">
             <div class="container">
                 <div class="content">
@@ -72,10 +69,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    {{--第二頁--}}
-    <div class="container-2">
-
     </div>
 </div>
 </body>
